@@ -1,0 +1,13 @@
+{% extends 'common/layouts/default.html' %}
+
+{% block body %}
+  {% require 'pages/home/styles/index.css' %}
+  {% require 'pages/home/scripts/index.js' %}
+
+  {% components %}
+   {% require "components/video-display" %}
+   {% require "components/list" %}
+  {% endcomponents %}
+  
+{% endblock %}
+

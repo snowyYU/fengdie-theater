@@ -1,0 +1,26 @@
+@import './default';
+@import './reset';
+@import './px2rem';
+
+html {
+  // PX does't parse by 'postcss-pxtorem'. But the browser is not case sensitive, so it works fine.
+  // Set `50` As the basis for rem initially. So it can work properly in the 1x screen of Android device.
+  font-size: 50PX;
+}
+.hidden {
+  display: none;
+}
+.singe-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.multi-ellipsis {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 5;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+

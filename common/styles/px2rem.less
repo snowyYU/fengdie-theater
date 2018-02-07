@@ -1,0 +1,119 @@
+@px2rem: ~`px2rem = function(px) { return px / 100 + 'rem'; }`;
+
+.width(@px) {
+  width: ~`px2rem("@{px}")`;
+}
+
+.height(@px) {
+  height: ~`px2rem("@{px}")`;
+}
+
+.line-height(@px) {
+  line-height: ~`px2rem("@{px}")`;
+}
+
+.font-size(@px) {
+  font-size: ~`px2rem("@{px}")`;
+}
+
+.padding(@px) {
+  padding: ~`px2rem("@{px}")`;
+}
+
+.padding(@px1; @px2) {
+  @p1: ~`px2rem("@{px1}")`;
+  @p2: ~`px2rem("@{px2}")`;
+  padding: @p1 @p2;
+}
+
+.padding(@px1; @px2; @px3) {
+  @p1: ~`px2rem("@{px1}")`;
+  @p2: ~`px2rem("@{px2}")`;
+  @p3: ~`px2rem("@{px3}")`;
+  padding: @p1 @p2 @p3;
+}
+
+.padding(@px1; @px2; @px3; @px4) {
+  @p1: ~`px2rem("@{px1}")`;
+  @p2: ~`px2rem("@{px2}")`;
+  @p3: ~`px2rem("@{px3}")`;
+  @p4: ~`px2rem("@{px4}")`;
+  padding: @p1 @p2 @p3 @p4;
+}
+
+.padding-top(@px) {
+  padding-top: ~`px2rem("@{px}")`;
+}
+
+.padding-left(@px) {
+  padding-left: ~`px2rem("@{px}")`;
+}
+
+.padding-bottom(@px) {
+  padding-bottom: ~`px2rem("@{px}")`;
+}
+
+.padding-right(@px) {
+  padding-right: ~`px2rem("@{px}")`;
+}
+
+.margin(@px) {
+  margin: ~`px2rem("@{px}")`;
+}
+
+.margin(@px1; @px2) {
+  @p1: ~`px2rem("@{px1}")`;
+  @p2: ~`px2rem("@{px2}")`;
+  margin: @p1 @p2;
+}
+
+.margin(@px1; @px2; @px3) {
+  @p1: ~`px2rem("@{px1}")`;
+  @p2: ~`px2rem("@{px2}")`;
+  @p3: ~`px2rem("@{px3}")`;
+  margin: @p1 @p2 @p3;
+}
+
+.margin(@px1; @px2; @px3; @px4) {
+  @p1: ~`px2rem("@{px1}")`;
+  @p2: ~`px2rem("@{px2}")`;
+  @p3: ~`px2rem("@{px3}")`;
+  @p4: ~`px2rem("@{px4}")`;
+  margin: @p1 @p2 @p3 @p4;
+}
+
+.margin-top(@px) {
+  margin-top: ~`px2rem("@{px}")`;
+}
+
+.margin-left(@px) {
+  margin-left: ~`px2rem("@{px}")`;
+}
+
+.margin-bottom(@px) {
+  margin-bottom: ~`px2rem("@{px}")`;
+}
+
+.margin-right(@px) {
+  margin-right: ~`px2rem("@{px}")`;
+}
+
+.border(@px; @type; @color) {
+  border: ~`px2rem("@{px}")` @type @color;
+}
+
+.border-top(@px; @type; @color) {
+  border-top: ~`px2rem("@{px}")` @type @color;
+}
+
+.border-left(@px; @type; @color) {
+  border-left: ~`px2rem("@{px}")` @type @color;
+}
+
+.border-bottom(@px; @type; @color) {
+  border-bottom: ~`px2rem("@{px}")` @type @color;
+}
+
+.border-right(@px; @type; @color) {
+  border-right: ~`px2rem("@{px}")` @type @color;
+}

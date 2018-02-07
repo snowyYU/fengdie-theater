@@ -1,0 +1,17 @@
+{
+  "name": "theater",
+  "version": "1.0.1",
+  "title": "漫游世界精品视频模板",
+  "author": "snowy",
+  "dependencies": {},
+  "entry": {
+    "common/styles/common": "./common/styles/common.less",
+    "pages/home/scripts/index": "./pages/home/scripts/index.js",
+    "pages/home/styles/index": "./pages/home/styles/index.less",
+    "components/list/scripts/index": "./components/list/scripts/index.js",
+    "components/list/styles/index": "./components/list/styles/index.less",
+    "components/video-display/scripts/index": "./components/video-display/scripts/index.js",
+    "components/video-display/styles/index": "./components/video-display/styles/index.less"
+  },
+  "license": "ISC"
+}

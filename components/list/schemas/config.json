@@ -1,0 +1,23 @@
+{
+  "btnImg": "https://gw.alipayobjects.com/zos/rmsportal/HVgTBpxKbjeeJGgDVnBa.png",
+  "lists": [
+    {
+      "title": "节目一：A股市场",      
+      "audio": "#",
+      "attitude": "",
+      "text": "漫步在巴黎街头"
+    },
+    {
+      "title": "节目二：港股市场",
+      "audio": "#",
+      "attitude": "",
+      "text": "漫步在伦敦街头"
+    },
+     {
+      "title": "节目三：债券市场",
+      "audio": "#",
+      "attitude": "",
+      "text": "漫步在纽约街头"
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{% require "styles/index.css" %}
+{% require "scripts/index.js" %}
+
+{% use "schemas/config" as config %}
+<div class="list-content">
+	
+	{% for item in config.lists %}
+	  <div class="item">
+	  	<div class="item-header">{{item.title}}</div>
+	  	<div class="item-content">
+	  		
+	  	</div>
+	  	<div class="item-desc">
+	  		<span></span>
+	  		<p>{{item.text}}</p>
+	  	</div>
+	  </div>
+	{% else %}
+	  <p>This would display if the 'item' collection were empty</p>
+	{% endfor %}
+	
+</div>
+{% enduse %}

@@ -1,0 +1,8 @@
+Object(投资大剧场) {
+  titleMain(主标题): Image,
+  titleVice(副标题): Image,  
+  bgImg(背景图片): Image,
+  heyMan(一位拉小提琴的男纸): Image,
+  btnCenter(正中按钮): Image,
+  btnRight(右侧按钮): Image,  
+}
