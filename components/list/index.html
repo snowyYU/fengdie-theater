@@ -2,13 +2,27 @@
 {% require "scripts/index.js" %}
 
 {% use "schemas/config" as config %}
-<div class="list-content">
+<div id="list-content">
 	
 	{% for item in config.lists %}
 	  <div class="item">
 	  	<div class="item-header">{{item.title}}</div>
 	  	<div class="item-content">
-	  		
+	  		<div class="audio-btn">
+	  			<div class="audio-btn-wrapper">
+	  				<div class="audio-btn-content" style="background-image:url({{config.btnImg}})">
+	  					<img class="stop" src="{{config.stopImg}}" alt="">
+	  					<img class="start" src="{{config.startImg}}" alt="">
+	  				</div>
+	  			</div>
+	  		</div>
+	  		<div class="time-in">00:00</div>
+	  		<div class="progress-bar">
+				<div class="progress"></div>
+				<div class="progress-btn"></div>
+			</div>
+			<div class="time-total">00:00</div>
+	  		<audio src="http://mp3.qqmusic.cc/yq/1142406.mp3"></audio>
 	  	</div>
 	  	<div class="item-desc">
 	  		<span></span>

@@ -3,11 +3,13 @@
 {% block body %}
   {% require 'pages/home/styles/index.css' %}
   {% require 'pages/home/scripts/index.js' %}
-
-  {% components %}
-   {% require "components/video-display" %}
-   {% require "components/list" %}
-  {% endcomponents %}
+	<div class="wrapper">
+	{% components %}
+	   {% require "components/video-display" %}
+	   {% require "components/list" %}
+	{% endcomponents %}
+	</div>
+  
   
 {% endblock %}
 

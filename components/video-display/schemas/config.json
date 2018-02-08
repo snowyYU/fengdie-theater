@@ -1,8 +1,12 @@
 {
-  "titleMain": "",
-  "titleVice": "https://gw.alipayobjects.com/zos/rmsportal/fQZxoUTGctmNbQhdIvvs.png",
-  "bgImg": "",
-  "heyMan": "",
-  "btnCenter": "",
-  "btnRight": ""
+  "titleMain": "https://gw.alipayobjects.com/os/q/cms/images/jdcgolld/727fa3d1-68fd-4065-ab1b-08b9ddb829fd_w492_h218.png",
+  "titleVice": "https://gw.alipayobjects.com/os/q/cms/images/jdcgolld/727fa3d1-68fd-4065-ab1b-08b9ddb829fd_w492_h218.png",
+  "bgImg": "https://gw.alipayobjects.com/os/q/cms/images/jdcgmmg2/c63e2b3c-47e5-4e2c-ac9e-61c79d924af4_w750_h1203.png",
+  "heyMan": "https://gw.alipayobjects.com/os/q/cms/images/jdcgpm3a/c78b0b6b-3713-4b04-948b-dfebf5e49de8_w263_h467.png",
+  "btnCenter": "https://gw.alipayobjects.com/os/q/cms/images/jdcgqmkg/a77cda84-f26e-44cd-b14d-7fac7e0f268d_w175_h173.png",
+  "btnRight": "https://gw.alipayobjects.com/os/q/cms/images/jdcgredj/bcc05820-a0b7-4219-b9fb-b2937a0f6330_w134_h126.png",
+  "presentBgImg": "https://gw.alipayobjects.com/os/q/cms/images/jdctun09/d3c0c91a-e3d7-4f18-9da8-ec4bfef1f8a3_w609_h840.png",
+  "oKnowBtn": "https://gw.alipayobjects.com/os/q/cms/images/jdcu5c66/78ba0f53-a5e8-402e-ab3d-0c3981b64eec_w461_h67.png",
+  "presentCloseBtn": "https://gw.alipayobjects.com/os/q/cms/images/jdcw1id5/43cbebfe-7621-4a3d-80fb-0b869ef9f14d_w48_h48.png",
+  "goToSee": "https://gw.alipayobjects.com/os/q/cms/images/jdcwxbw2/07dc5167-ed65-41f2-be24-9363f8f70639_w123_h44.png"
 }

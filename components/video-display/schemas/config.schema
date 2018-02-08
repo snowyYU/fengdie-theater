@@ -4,5 +4,9 @@ Object(投资大剧场) {
   bgImg(背景图片): Image,
   heyMan(一位拉小提琴的男纸): Image,
   btnCenter(正中按钮): Image,
-  btnRight(右侧按钮): Image,  
+  btnRight(右侧按钮): Image,
+  presentBgImg(献花弹出框背景): Image,
+  oKnowBtn(知道了按钮): Image,
+  presentCloseBtn(献花的关闭按钮): Image,
+  goToSee(去看看按钮): Image
 }

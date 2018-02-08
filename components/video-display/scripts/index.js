@@ -27,3 +27,21 @@ window['_component_video-display'] = function(id) {
   });
 
 }
+$('#btnCenter').on('click',(e)=>{
+  $('.wrapper').css('overflow','hidden');
+  $('#present').show();
+})
+
+$('#knowBtn').on('click',(e)=>{
+  $('.wrapper').css('overflow','');
+  $('#present').hide();
+})
+$('#btnRight').on('click',(e)=>{
+  $('.wrapper').css('overflow','hidden');
+  $('#review').show();
+})
+
+$('#reviewCloseBtn').on('click',(e)=>{
+  $('.wrapper').css('overflow','');
+  $('#review').hide();
+})

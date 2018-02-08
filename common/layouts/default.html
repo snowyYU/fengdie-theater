@@ -9,6 +9,27 @@
         // 设置基础字体大小及字体缩放比例
         vl(100, 750);
     </script>
+    <script>
+        // 是否含有相关类
+        const hasClass = (obj,cls)=> {
+        	return obj.className.match(new RegExp('(\\s|^)' + cls + '(\\s|$)'));
+        }
+        //
+        const addClass= (obj,cls)=>{
+            if (!obj.className.match(new RegExp('(\\s|^)' + cls + '(\\s|$)'))) {
+                obj.className += " " +cls;
+            }
+            return obj;
+        };
+        /*移除class*/
+        const removeClass=(obj,cls)=>{
+            if (obj.className.match(new RegExp('(\\s|^)' + cls + '(\\s|$)'))) {
+                var reg = new RegExp('(\\s|^)' + cls + '(\\s|$)');
+                obj.className = obj.className.replace(reg, ' ');
+            }
+            return obj;
+        };
+    </script>
 </head>
 <body>
 {% block body %}{% endblock %}
