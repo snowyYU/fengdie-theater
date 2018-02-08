@@ -1,0 +1,27 @@
+@import '../../../common/styles/common.less';
+.list-content{
+  .padding(26);
+  .item-header::before{
+    content: "";
+    position: absolute;
+    .width(10);
+    .height(30);
+    background-color: red;
+  }
+  .item-header{
+    .padding-left(10);
+  }
+  .item-content{
+    width: 100%;
+    .height(118);
+    border-radius:5px;
+    .border(2,solid,#f6f6f6);
+
+  }
+  .item-desc{
+    .margin-top(10);
+    background-color: #f6f6f6;
+    .height(250);
+    border-radius:5px;
+  }
+}
