@@ -11,18 +11,18 @@
     </script>
     <script>
         // 是否含有相关类
-        const hasClass = (obj,cls)=> {
+        function hasClass (obj,cls) {
         	return obj.className.match(new RegExp('(\\s|^)' + cls + '(\\s|$)'));
         }
         //
-        const addClass= (obj,cls)=>{
+        function addClass (obj,cls){
             if (!obj.className.match(new RegExp('(\\s|^)' + cls + '(\\s|$)'))) {
                 obj.className += " " +cls;
             }
             return obj;
         };
         /*移除class*/
-        const removeClass=(obj,cls)=>{
+        function removeClass(obj,cls){
             if (obj.className.match(new RegExp('(\\s|^)' + cls + '(\\s|$)'))) {
                 var reg = new RegExp('(\\s|^)' + cls + '(\\s|$)');
                 obj.className = obj.className.replace(reg, ' ');
@@ -30,8 +30,97 @@
             return obj;
         };
     </script>
+    <!-- <script type="text/javascript">
+      import { auth } from '../scripts/auth'
+      auth.getUserInfo()
+    </script> -->
 </head>
 <body>
+  {% use 'common/config/config' as commonPageConfig %}
+    {# 编辑页面“点击编辑”按钮 #}
+    {% if global.env == 'editor' %}
+    <div style="background-color:#0e8ee9; color: #FFF; top:0;left:0;font-size:.16rem;text-align: center;height:.3rem;line-height:.3rem;width:100%;">页面公共配置项</div>
+    {% endif %}
+    {# 定义公共配置项变量 #}
+    <script>
+        var globalSchemaData = {{commonPageConfig | stringify}}
+        var globalEnv = "{{global.env}}"
+    </script>
+    <script type="text/javascript">
+        var localUserInfo = {
+            userId: 2088802298938696,
+            nickname: null
+        }
+        // 获取信息
+        function getUserInfo() {
+            const code = queryUrlParam('auth_code');
+            // if (globalEnv === 'local' || globalEnv === 'editor') {
+            //   console.log(localUserInfo);
+            //     sessionStorage._DL_userInfo = JSON.stringify(localUserInfo)
+            // }
+            const userInfo = sessionStorage.getItem("userId");
+            return new Promise(function(resolve, reject) {
+                if (!userInfo) {
+                    if (!code) {
+                        authRedirect()
+                    } else {
+                      //写原生xhr
+                      const xhr = new XMLHttpRequest();
+                      let authResult = new Promise(function(resolve, reject) {
+                        xhr.onreadystatechange = function () {
+                            // console.log(`
+                            //     xhr.readyState: ${xhr.readyState}
+                            //     xhr.statusText: ${xhr.statusText}
+                            //     xhr.response: ${xhr.response}
+                            // `);
+                             if (xhr.readyState == 4) {
+                               let data = JSON.parse(xhr.response)
+                               resolve(data)
+                             }
+                        }
+                      });
+                      authResult.then((res) => {
+                          sessionStorage.setItem('userId',res.userId)
+                          resolve(res.data)
+                      })
+                      .catch ((err) => {
+                          reject(err);
+                      })
+                      let requestUrl = globalSchemaData.userIdAPI+'?code='+code+'&scope='+globalSchemaData.scopeType
+                      xhr.open('GET',requestUrl, true);
+                      xhr.send();
+                    }
+                } else {
+                    resolve(userInfo)
+                }
+            })
+        }
+        // 授权回调
+        function authRedirect() {
+          const redirectU = window.location.href
+            // const redirectU = 'http://127.0.0.1:8010/pages/home/index.html'
+            console.log(redirectU)
+            window.location.replace('https://openauth.alipay.com/oauth2/publicAppAuthorize.htm?app_id=' + globalSchemaData.appId + '&scope='+ globalSchemaData.redirectScope + '&redirect_uri=' + redirectU);
+        }
+        // 获取浏览地址参数
+        function queryUrlParam(key) {
+            var reg = new RegExp("(^|&)" + key + "=([^&]*)(&|$)");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return decodeURIComponent(r[2]);
+            return null
+        }
+        console.log(window.location.href)
+
+        {% if global.env != 'editor' %}
+        //getUserInfo().then((res)=>{
+           // console.log('getuserinfo执行的',res);
+         // })
+        {% endif %}
+
+
+
+    </script>
+    {% enduse %}
 {% block body %}{% endblock %}
 <script src="https://gw.alipayobjects.com/os/rmsportal/POVGBcFkPRjKCKPkdOoa.js"></script>
 </body>

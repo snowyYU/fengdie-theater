@@ -1,9 +1,11 @@
 {
   "name": "theater",
-  "version": "1.0.1",
+  "version": "1.1.4",
   "title": "投资大剧场",
   "author": "snowy",
-  "dependencies": {},
+  "dependencies": {
+    "axios": "^0.18.0"
+  },
   "entry": {
     "common/styles/common": "./common/styles/common.less",
     "pages/home/scripts/index": "./pages/home/scripts/index.js",

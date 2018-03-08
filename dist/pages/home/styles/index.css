@@ -109,3 +109,7 @@ html {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+.wrapper {
+  position: relative;
+  height: 100vh;
+}

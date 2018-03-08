@@ -1,0 +1,9 @@
+{
+  "baseURL": "http://192.168.0.47:8082/",
+  "webSocketURL": "wss://192.168.0.47:8082/htf/ws/like",
+  "drawBaseURL": "https://www.cdollar.cn/",
+  "appId": "2017122001002849",
+  "userIdAPI": "https://www.tdollar.cn/activity-engine/oauth/alipay/2017122001002849",
+  "scopeType": "USER_INFO",
+  "redirectScope": "auth_user"
+}

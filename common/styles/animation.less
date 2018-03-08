@@ -1,6 +1,29 @@
 @import './px2rem.less';
 @keyframes ripple {
-  0% { .border(2,solid,white); }
-  50% { .border(2,solid,red); }
-  100% { .border(2,solid,white); }
+  0% {
+    .border(4,solid,white);
+  }
+  50% {
+    .border(4,solid,red);
+  }
+  100% {
+    .border(4,solid,white);
+  }
+}
+@keyframes slider {
+  0% {
+    background-position-y: 6px;
+  }
+  25% {
+    background-position-y: 10px;
+  }
+  50% {
+    background-position-y: 14px;
+  }
+  75% {
+    background-position-y: 10px;
+  }
+  100% {
+    background-position-y: 6px;
+  }
 }

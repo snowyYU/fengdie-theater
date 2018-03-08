@@ -1,9 +1,0 @@
-Object(回顾弹出框) {
-  btnImg(背景图片): Image,
-  lists (列表项信息): Array {
-    title(列表标题): String,
-    audio(音频地址): URL,
-    attitude(态度意见): String,
-    text(介绍): RichText, 
-  }
-}

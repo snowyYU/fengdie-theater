@@ -1,3 +1,4 @@
+import {myHttp} from '../../../common/scripts/http'
 window['_component_list'] = function(id) {
   // 凤蝶组件入口函数，会自动注入组件的 id，
   // 可根据此 id 获取组件对应在页面上的 DOM 元素
@@ -8,6 +9,60 @@ window['_component_list'] = function(id) {
 };
   // console.log('测试组件2');
 
+// 因为接口返回的数据不是数组，采用id选择
+const AAudioUrl = $("#AAudioUrl")
+const AContent = $("#AContent")
+const BondAudioUrl = $("#BondAudioUrl")
+const BondContent = $("#BondContent")
+const HKAudioUrl = $("#HKAudioUrl")
+const HKContent = $("#HKContent")
+
+// 请求主页音频相关数据
+console.log(myHttp);
+myHttp.get(myHttp.api.content)
+      .then((res)=>{
+        console.log(res);
+        AAudioUrl[0].src=res.data.aAudioUrl;
+        BondAudioUrl[0].src=res.data.bondAudioUrl;
+        HKAudioUrl[0].src=res.data.hkAudioUrl;
+        // 保存剧场期数id
+        window['theaterId']=res.data.id;
+        // 初始化音频的总时间
+        // 遍历,监听durationchange
+        [AAudioUrl[0],BondAudioUrl[0],HKAudioUrl[0]].forEach((e)=>{
+          e.addEventListener("durationchange",()=>{
+            setTimeout(()=>{
+              setAllTime();
+            },100)
+          })
+        })
+
+        AContent.html(audioDescript(res.data.aOpinion, res.data.aContent))
+        BondContent.html(audioDescript(res.data.bondOpinion, res.data.bondContent))
+        HKContent.html(audioDescript(res.data.hkOpinion, res.data.hkContent))
+      })
+// 主题内容输出m模版
+function audioDescript(type,content) {
+  let classType;
+  switch (type) {
+    case '看好':
+      classType = 'redType';
+      break;
+    case '继续看好':
+      classType = 'yellowType';
+      break;
+    case '观望':
+      classType = 'orangeType';
+      break;
+    default:
+      classType = 'redType';
+      break;
+  }
+  let template = `
+    <span class="${classType}">${type}</span>${content}
+  `
+  return template
+}
 
 // 激活进度条
 function activeProgressBar (btn,pro) {
@@ -73,27 +128,29 @@ const listContent = document.querySelector('#list-content');
         }, 300);
       }
     }
-      
+
     // clearInterval(touchstart)
   })
 })
 
 //点击播放
-listContent.addEventListener('click', (e)=>{
+listContent.addEventListener('touchstart', (e)=>{
   let event = e || window.event;
   let audioBtn = event.target || event.srcElement;
+  // 遍历，直到获取按钮
   while (audioBtn && !audioBtn.matches('.audio-btn-wrapper')) {
       audioBtn = audioBtn.parentNode
       if (document === audioBtn) {
           audioBtn = null
       }
   }
+  // alert("XXXXX");
   if (audioBtn) {
       let audio = audioBtn.parentNode.parentNode.querySelector('audio');
-      console.log(audio);
+
       if (audio.paused) {
         //开始播放
-        
+
         //暂停所有播放，清除定时器
         reset();
         clearInterval(progressTimer);
@@ -108,18 +165,16 @@ listContent.addEventListener('click', (e)=>{
         removeClass(audioBtn,'active');
         audio.pause();
       }
-      
+
   }
   // let audio = audioBtn.parentNode.parentNode
 })
-setTimeout(()=>{
-  setAllTime();
-},1000)
+
 
 //初始化所有音频右侧的总时间
 function setAllTime() {
-  let allAudio = document.querySelectorAll('#list-content audio');  
-  allAudio.forEach((e)=>{
+  let allAudio = document.querySelectorAll('#list-content audio');
+  [].forEach.call(allAudio,(e)=>{
     let timeTotal = e.parentNode.querySelector('.time-total');
     timeTotal.innerHTML = timer_format(e.duration);
   })
@@ -127,9 +182,9 @@ function setAllTime() {
 function reset() {
 
   //暂停所有音频
-  let allAudio = document.querySelectorAll('#list-content audio');  
+  let allAudio = document.querySelectorAll('#list-content audio');
   console.log(allAudio);
-  allAudio.forEach((e)=>{
+  [].forEach.call(allAudio,(e)=>{
     e.pause();
     let active = e.parentNode.querySelector('.audio-btn-wrapper')
     if (hasClass(active,'active')) {
@@ -143,7 +198,7 @@ function timer_format(s) {
   if(s > -1){
       min = Math.floor(s/60);
       sec = Math.floor(s % 60);
-      t=""; 
+      t="";
       if(min < 10){t += "0";}
           t += min + ":";
       if(sec < 10){t += "0";}

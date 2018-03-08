@@ -1,30 +1,56 @@
 {% require "styles/index.css" %}
 {% require "scripts/index.js" %}
 {% use "schemas/config" as config %}
-
+<script>
+  var headerSchemaData = {{config | stringify}}
+</script>
 <div class="stage">
   <div class="stage-content" style="background-image:url({{config.bgImg}})">
     <div class="stage-title" style="background-image:url({{config.titleMain}})"></div>
     <div class="hey-man" style="background-image:url({{config.heyMan}})"></div>
+    <div id="totalFlowers">
+      已有<span class="presentNumber"></span>人献花
+    </div>
     <div class="btn-group">
-      <div id="btnCenter" style="background-image:url({{config.btnCenter}})"></div>
+      <div id="btnCenter" style="background-image:url({{config.btnCenteRipper}})">
+        <img src="{{config.btnCenter}}" alt="">
+      </div>
       <div id="btnRight" style="background-image:url({{config.btnRight}})"></div>
     </div>
     <h1 class="title-program">节目单</h1>
+    <div class="bottom-slider" style="background-image:url({{config.slider}})">
+
+    </div>
   </div>
   <div id="present">
     <div class="present-content" style="background-image:url({{config.presentBgImg}})">
       <h1 class="present-title">市场回顾</h1>
-      <div class="present-text"></div>
-      <div class="present-audio"></div>
+      <div class="present-text" id="reviewContent"></div>
+      <div class="present-audio">
+        <div class="audio-btn">
+          <div class="audio-btn-wrapper">
+            <div class="audio-btn-content" style="background-image:url({{config.btnImg}})">
+              <img class="stop" src="{{config.stopImg}}" alt="">
+              <img class="start" src="{{config.startImg}}" alt="">
+            </div>
+          </div>
+        </div>
+        <div class="time-in">00:00</div>
+        <div class="progress-bar">
+          <div class="progress"></div>
+          <div class="progress-btn"></div>
+        </div>
+        <div class="time-total">00:00</div>
+        <audio src="http://mp3.qqmusic.cc/yq/1142406.mp3" id="reviewAudioUrl"></audio>
+      </div>
       <div id="knowBtn" style="background-image:url({{config.oKnowBtn}})"></div>
     </div>
   </div>
   <div id="review">
+    <div id="reviewCloseBtn" style="background-image:url({{config.presentCloseBtn}})"></div>
     <div class="review-content">
-      <div id="reviewCloseBtn" style="background-image:url({{config.presentCloseBtn}})"></div>  
       <h1 class="review-title">感谢您的献花，为您送上本周基金推荐</h1>
-      <div class="review-item">
+      <!-- <div class="review-item">
         <div class="item-part item-left">
           <div class="item-left-num">+29.99%</div>
           <div class="item-desc">近一年涨幅</div>
@@ -36,7 +62,7 @@
         <div class="item-part item-right">
           <div class="goToSee" style="background-image:url({{config.goToSee}})"></div>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 </div>

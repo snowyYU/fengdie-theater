@@ -1,0 +1,9 @@
+Object(页面配置) {
+    baseURL(接口请求baseURL),
+    webSocketURL(websocketURL),
+    drawBaseURL(平台抽奖查奖等接口请求baseURL),
+    appId(appId),
+    userIdAPI(获取用户信息请求接口),
+    scopeType(授权接口scope),
+    redirectScope(回调授权scope)
+}

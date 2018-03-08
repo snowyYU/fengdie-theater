@@ -1,37 +1,85 @@
-{% require "styles/index.css" %}
-{% require "scripts/index.js" %}
-
-{% use "schemas/config" as config %}
+{% require "styles/index.css" %} {% require "scripts/index.js" %} {% use "schemas/config" as config %}
 <div id="list-content">
-	
-	{% for item in config.lists %}
-	  <div class="item">
-	  	<div class="item-header">{{item.title}}</div>
-	  	<div class="item-content">
-	  		<div class="audio-btn">
-	  			<div class="audio-btn-wrapper">
-	  				<div class="audio-btn-content" style="background-image:url({{config.btnImg}})">
-	  					<img class="stop" src="{{config.stopImg}}" alt="">
-	  					<img class="start" src="{{config.startImg}}" alt="">
-	  				</div>
-	  			</div>
-	  		</div>
-	  		<div class="time-in">00:00</div>
-	  		<div class="progress-bar">
-				<div class="progress"></div>
-				<div class="progress-btn"></div>
-			</div>
-			<div class="time-total">00:00</div>
-	  		<audio src="http://mp3.qqmusic.cc/yq/1142406.mp3"></audio>
-	  	</div>
-	  	<div class="item-desc">
-	  		<span></span>
-	  		<p>{{item.text}}</p>
-	  	</div>
-	  </div>
-	{% else %}
-	  <p>This would display if the 'item' collection were empty</p>
-	{% endfor %}
-	
+
+  <div class="item">
+    <div class="item-header">节目一：A股市场</div>
+    <div class="item-content">
+      <div class="audio-btn">
+        <div class="audio-btn-wrapper">
+          <div class="audio-btn-content" style="background-image:url({{config.btnImg}})">
+            <img class="stop" src="{{config.stopImg}}" alt="">
+            <img class="start" src="{{config.startImg}}" alt="">
+          </div>
+        </div>
+      </div>
+      <div class="time-in">00:00</div>
+      <div class="progress-bar">
+        <div class="progress"></div>
+        <div class="progress-btn"></div>
+      </div>
+      <div class="time-total">00:00</div>
+      <audio src="http://mp3.qqmusic.cc/yq/1142406.mp3" id="AAudioUrl"></audio>
+    </div>
+    <div class="item-desc">
+      <span></span>
+      <p id="AContent"></p>
+    </div>
+  </div>
+
+  <div class="item">
+    <div class="item-header">节目二：港股市场</div>
+    <div class="item-content">
+      <div class="audio-btn">
+        <div class="audio-btn-wrapper">
+          <div class="audio-btn-content" style="background-image:url({{config.btnImg}})">
+            <img class="stop" src="{{config.stopImg}}" alt="">
+            <img class="start" src="{{config.startImg}}" alt="">
+          </div>
+        </div>
+      </div>
+      <div class="time-in">00:00</div>
+      <div class="progress-bar">
+        <div class="progress"></div>
+        <div class="progress-btn"></div>
+      </div>
+      <div class="time-total">00:00</div>
+      <audio src="http://mp3.qqmusic.cc/yq/1142406.mp3" id="BondAudioUrl"></audio>
+    </div>
+    <div class="item-desc">
+      <span></span>
+      <p id="BondContent"></p>
+    </div>
+  </div>
+
+  <div class="item">
+    <div class="item-header">节目三：债券市场</div>
+    <div class="item-content">
+      <div class="audio-btn">
+        <div class="audio-btn-wrapper">
+          <div class="audio-btn-content" style="background-image:url({{config.btnImg}})">
+            <img class="stop" src="{{config.stopImg}}" alt="">
+            <img class="start" src="{{config.startImg}}" alt="">
+          </div>
+        </div>
+      </div>
+      <div class="time-in">00:00</div>
+      <div class="progress-bar">
+        <div class="progress"></div>
+        <div class="progress-btn"></div>
+      </div>
+      <div class="time-total">00:00</div>
+      <audio src="http://mp3.qqmusic.cc/yq/1142406.mp3" id="HKAudioUrl"></audio>
+    </div>
+    <div class="item-desc">
+      <span></span>
+      <p id="HKContent"></p>
+    </div>
+  </div>
+
+  <footer>
+    <p>本页面由汇添富基金管理有限公司提供</p>
+    <p class="smallDes">基金销售服务由蚂蚁(杭州)基金销售有限公司提供</p>
+    <p class="smallDes">过往业绩不预示未来表现，市场有风险，投资需谨慎</p>
+  </footer>
 </div>
 {% enduse %}

@@ -4,6 +4,7 @@
   .padding(26);
   .item{
     position: relative;
+    padding-bottom: 20px;
     .item-header{
       .padding-left(16);
       &:before{
@@ -20,7 +21,7 @@
       width: 100%;
       .height(118);
       border-radius:5px;
-      .border(2,solid,#f6f6f6);
+      .border(4,solid,#f6f6f6);
       .audio-btn{
         float: left;
         .width(100);
@@ -30,7 +31,7 @@
           .width(96);
           .height(96);
           border-radius: 50%;
-
+          .border(4,solid,white);
           .audio-btn-content{
             box-sizing: border-box;
             .width(78);
@@ -115,7 +116,36 @@
       background-color: #f6f6f6;
       .height(250);
       border-radius:5px;
+      word-break: break-all;
+      padding: 8px;
+      .typeCommon{
+        color: white;
+        padding: 0 4px;
+        border-radius: 4px;
+      }
+      .redType{
+        .typeCommon;
+        background-color: #ff405e;
+      };
+      .yellowType{
+        .typeCommon;
+        background-color: #ff9540;
+      };
+      .orangeType{
+        .typeCommon;
+        background-color: #ff5d37;
+      }
     }
   }
-    
+
+}
+
+footer {
+	text-align: center;
+	.font-size(28);
+  color: #979797;
+  .smallDes{
+    .font-size(24);
+    color: #979797;
+  }
 }
