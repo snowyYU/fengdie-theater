@@ -16,15 +16,12 @@ $('#knowBtn').on('click',(e)=>{
 $('#btnCenter').on('click',(e)=>{
   $('.wrapper').css('overflow','hidden');
   send(1);
-  $('#review').show();
+
+
   // 两个接口
   // 先请求献花接口
   //
-  getRecommendFund()
-  setTimeout(()=>{
-    $('#review').css('opacity',1);
-    $('#review').css('filter','Alpha(opacity=0)');
-  })
+
 
 
 })
@@ -37,44 +34,113 @@ $('#reviewCloseBtn').on('click',(e)=>{
 })
 
 // websocket 部分
-
+// ******************************************* websocket start **********************************
 var websocket = null;
+var lockReconnect = false;  //避免ws重复连接
 //判断当前浏览器是否支持WebSocket
 var websocketRequestUrl = globalSchemaData.webSocketURL + '?userId='+sessionStorage.getItem("userId")
 console.log(websocketRequestUrl);
-if ('WebSocket' in window) {
-    websocket = new WebSocket(websocketRequestUrl);
+createWebSocket(websocketRequestUrl)
+// 建立websocket
+function createWebSocket(url) {
+    try{
+        if('WebSocket' in window){
+            websocket = new WebSocket(url);
+        }else if('MozWebSocket' in window){
+            websocket = new MozWebSocket(url);
+        }else{
+            alert("您的浏览器不支持websocket协议,建议使用新版谷歌、火狐等浏览器，请勿使用IE10以下浏览器，360浏览器请使用极速模式，不要使用兼容模式！");
+        }
+        initEventHandle();
+    }catch(e){
+        reconnect(url);
+        console.log(e);
+    }
 }
-else {
-    alert('当前浏览器 Not support websocket')
+// 初始化各事件的处理函数
+function initEventHandle() {
+    //连接关闭的回调方法
+    websocket.onclose = function () {
+        reconnect(websocketRequestUrl);
+        console.log("llws连接关闭!"+new Date().toUTCString());
+    };
+    //连接发生错误的回调方法
+    websocket.onerror = function () {
+        reconnect(websocketRequestUrl);
+        console.log("llws连接错误!");
+    };
+    //连接成功建立的回调方法
+    websocket.onopen = function () {
+        heartCheck.reset().start();      //心跳检测重置
+        console.log("llws连接成功!"+new Date().toUTCString());
+    };
+    //接收到消息的回调方法
+    websocket.onmessage = function (event) {    //如果获取到消息，心跳检测重置
+        heartCheck.reset().start();      //拿到任何消息都说明当前连接是正常的
+        console.log("websocket return data",event.data);
+        // 先根据后台返回判断是否是心跳,是的话不会向下执行
+        if (event.data == 'ok') {
+          return
+        }
+        // 根据后台返回判断今天是否已经献花
+        if(event.data&&event.data!=='false'){
+          $("#totalFlowers .presentNumber").text(event.data)
+          console.log(event.data);
+          // 出现献花动画
+          $('#presentFlowers img').addClass('active')
+          setTimeout(()=>{
+            $('#presentFlowers img').removeClass('active')
+          },2000)
+          $('#review').show();
+          getRecommendFund()
+          setTimeout(()=>{
+            $('#review').css('opacity',1);
+            $('#review').css('filter','Alpha(opacity=0)');
+          },2000)
+        } else {
+          // 修改弹框文案，并且弹框无延迟
+          $("#review .review-title").html("今天您已经献过花啦，一天只能献一次花哦");
+          $('#review').show();
+          getRecommendFund()
+          setTimeout(()=>{
+            $('#review').css('opacity',1);
+            $('#review').css('filter','Alpha(opacity=0)');
+          })
+        }
+    };
 }
 
-//连接发生错误的回调方法
-websocket.onerror = function () {
-    console.log("WebSocket连接发生错误");
-};
-
-//连接成功建立的回调方法
-websocket.onopen = function () {
-    console.log("WebSocket连接成功");
+function reconnect(url) {
+    if(lockReconnect) return;
+    lockReconnect = true;
+    setTimeout(function () {     //没连接上会一直重连，设置延迟避免请求过多
+        createWebSocket(url);
+        lockReconnect = false;
+    }, 2000);
 }
 
-//接收到消息的回调方法
-websocket.onmessage = function (event) {
-  console.log("websocket return data",event.data);
-  // 根据后台返回判断今天是否已经献花
-  if(event.data&&event.data!=='false'){
-    $("#totalFlowers .presentNumber").text(event.data)
-    console.log(event.data);
-  } else {
-    $("#review .review-title").html("今天您已经献过花啦，一天只能献一次花哦")
-  }
-
-}
-
-//连接关闭的回调方法
-websocket.onclose = function () {
-    console.log("WebSocket连接关闭");
+//心跳检测
+var heartCheck = {
+    timeout: 180000,        //5分钟发一次心跳
+    timeoutObj: null,
+    serverTimeoutObj: null,
+    reset: function(){
+        clearTimeout(this.timeoutObj);
+        clearTimeout(this.serverTimeoutObj);
+        return this;
+    },
+    start: function(){
+        var self = this;
+        this.timeoutObj = setTimeout(function(){
+            //这里发送一个心跳，后端收到后，返回一个心跳消息，
+            //onmessage拿到返回的心跳就说明连接正常
+            send("ping");
+            console.log("ping!")
+            self.serverTimeoutObj = setTimeout(function(){//如果超过一定时间还没重置，说明后端主动断开了
+                websocket.close();     //如果onclose会执行reconnect，我们执行websocket.close()就行了.如果直接执行reconnect 会触发onclose导致重连两次
+            }, self.timeout)
+        }, this.timeout)
+    }
 }
 
 //监听窗口关闭事件，当窗口关闭时，主动去关闭websocket连接，防止连接还没断开就关闭窗口，server端会抛异常。
@@ -86,11 +152,15 @@ window.onbeforeunload = function () {
 function closeWebSocket() {
     websocket.close();
 }
-
 //发送消息
 function send(message) {
     websocket.send(message);
 }
+
+// 加入心跳检测部分，
+
+
+// ************************************* websocket end ****************************************
 
 
 // 专为回顾部分的音频准备的

@@ -155,7 +155,14 @@ listContent.addEventListener('touchstart', (e)=>{
         reset();
         clearInterval(progressTimer);
         addClass(audioBtn,'active');
-        audio.play();
+        try {
+          audio.play();
+        } catch (e) {
+          alert("视频播放失败")
+        } finally {
+
+        }
+
         progressTimer = setInterval(()=>{
           activeProgressBar.call(audio)
         }, 300);
@@ -176,7 +183,12 @@ function setAllTime() {
   let allAudio = document.querySelectorAll('#list-content audio');
   [].forEach.call(allAudio,(e)=>{
     let timeTotal = e.parentNode.querySelector('.time-total');
-    timeTotal.innerHTML = timer_format(e.duration);
+    if (e.duration) {
+      timeTotal.innerHTML = timer_format(e.duration);
+    } else {
+      console.log(e);
+    }
+
   })
 }
 function reset() {
